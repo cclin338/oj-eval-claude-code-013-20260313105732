@@ -565,8 +565,7 @@ template<
            return node->data->second;
        }
        // Need to insert with default value
-       T defaultValue = T();
-       value_type val(key, defaultValue);
+       value_type val(key, T());
        bool inserted;
        Node* result;
        root = insertNode(root, val, nullptr, inserted, result);
