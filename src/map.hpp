@@ -130,12 +130,14 @@ template<
        // Left Right Case
        if (balance > 1 && comp(node->left->data->first, val.first)) {
            node->left = rotateLeft(node->left);
+           node->left->parent = node;
            return rotateRight(node);
        }
 
        // Right Left Case
        if (balance < -1 && comp(val.first, node->right->data->first)) {
            node->right = rotateRight(node->right);
+           node->right->parent = node;
            return rotateLeft(node);
        }
 
@@ -164,8 +166,10 @@ template<
 
        if (comp(key, node->data->first)) {
            node->left = deleteNode(node->left, key, deleted);
+           if (node->left) node->left->parent = node;
        } else if (comp(node->data->first, key)) {
            node->right = deleteNode(node->right, key, deleted);
+           if (node->right) node->right->parent = node;
        } else {
            deleted = true;
 
@@ -198,6 +202,7 @@ template<
        // Left Right Case
        if (balance > 1 && getBalance(node->left) < 0) {
            node->left = rotateLeft(node->left);
+           node->left->parent = node;
            return rotateRight(node);
        }
 
@@ -209,6 +214,7 @@ template<
        // Right Left Case
        if (balance < -1 && getBalance(node->right) > 0) {
            node->right = rotateRight(node->right);
+           node->right->parent = node;
            return rotateLeft(node);
        }
 
