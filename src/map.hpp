@@ -186,6 +186,7 @@ template<
                delete oldData;
                bool dummyDeleted;
                node->right = deleteNode(node->right, temp->data->first, dummyDeleted);
+               if (node->right) node->right->parent = node;
            }
        }
 
